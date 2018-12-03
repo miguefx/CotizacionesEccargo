@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:metadata>
+        <f:viewParam name="idCotizacion" value="#{bean.idCotizacion}"/>
+    </f:metadata>
+    <h:head>
+        <title>Cotizacion informacion</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <!--===============================================================================================-->
+        <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/noui/nouislider.min.css"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="css/util.css"/>
+        <link rel="stylesheet" type="text/css" href="css/main.css"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="css/newcss.css"/>
+
+    </h:head>
+    <h:body>
+
+
+        <div class="container-contact100">
+            <div class="wrap-contact100">
+                <h:form class="contact100-form validate-form" id="form">
+                    <span class="contact100-form-title">
+                        <h:outputLabel  value="Cotizacion #{bean.prefijoNumero}"  />
+                    </span>
+                    <br></br>
+                    <div class="wrap-input100  bg1 rs1-wrap-input100" >
+                        <span class="label-input100">Fecha Cotizacion</span>
+                        <h:outputLabel class="input100" value="#{bean.fechaCotizacion}"  >
+                            <f:convertDateTime type="date" pattern="dd/MM/yyyy hh:mm" />
+                        </h:outputLabel>
+                    </div>
+                    <div class="wrap-input100 bg1 rs1-wrap-input100">
+                        <span class="label-input100">Razon Social</span>
+                        <h:outputLabel class="input100" value="#{bean.razonSocial} " />
+                    </div>
+                    <div class="wrap-input100 bg1 rs1-wrap-input100">
+                        <span class="label-input100">Contacto</span>
+                        <h:outputLabel class="input100" value="#{bean.representante}" />
+                    </div>
+                    <div class="wrap-input100 bg1 rs1-wrap-input100">
+                        <span class="label-input100">Ciudad Contacto</span>
+                        <h:outputLabel class="input100" value="#{bean.ciudadEpresa}" />
+                    </div>
+                    <div class="wrap-input100 bg1 rs1-wrap-input100">
+                        <span class="label-input100">Direccion De Entrega</span>
+                        <h:outputLabel class="input100" value="#{bean.direccionEmpresa}" />
+                    </div>
+                    <br></br>
+                    <div class="wrap-input100 bg1 ">
+                        <p:growl id="msgs" showDetail="true"/>
+
+                        <p:dataTable id="as" value="#{bean.listTable}"  editable="true" var="detalle"   reflow="true" rows="5" paginator="true" selection="#{bean.listTableSelection}" rowKey="#{detalle.idCotizacionDetalle}" >
+                            <p:column selectionMode="multiple" styleClass="togglablefield"  headerText="Seleccionar"  style="width:120px;text-align:center"/>
+                            <p:column  headerText="Concepto" >
+                                <h:outputLabel class="label-input100" value="#{detalle.concepto}"/>
+                            </p:column>
+                            <p:column headerText="Clase">
+                                <h:outputLabel class="label-input100" value="#{detalle.tamañoContenedor}"/>
+                            </p:column>
+                            <p:column headerText="Cantidad">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputLabel class="label-input100" value="#{detalle.cantidad}"/>
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText class="label-input100" style="width: 96%" value="#{detalle.cantidad}"/>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Valor Concepto"  >
+                                <h:outputLabel class="label-input100"  id="valornuevo" value="#{detalle.valorVenta}"/>
+                            </p:column>
+                            <p:column headerText="Numero Meses">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputLabel class="label-input100"   value="#{detalle.meses}"/>
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText class="label-input100"  style="width: 96%" value="#{detalle.meses}"/>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Fecha Inicio">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputLabel class="label-input100"   value="#{detalle.fechaInicio}"/>
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputMask class="label-input100" mask="9999-99-99" style="width: 96%" value="#{detalle.fechaInicio}"/>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column style="width:10%" headerText="Modificar">
+                                <p:rowEditor editTitle="Modificar"  />
+                            </p:column>
+                        </p:dataTable>
+
+                    </div>
+                    <div class="container-contact100-form-btn">
+                        <h:commandButton  styleClass="contact100-form-btn" style="pointer-events: cursor;" value="Confirmar"   actionListener="#{bean.modificarPrioridad(egt)}" action="EnvioCliente"/>
+                    </div>
+                </h:form>
+
+            </div>
+        </div>
+        <script>
+            $(document).on("click", "form .fieldtoggler .ui-chkbox-box", function () {
+                var checked = $(this).closest(".ui-chkbox").find(":checkbox").get(0).checked;
+                $(this).closest("form").find(".togglablefield").attr("disabled", checked);
+            });
+        </script>
+
+        <script type="text/javascript">
+            {
+                if (history.forward(1))
+                    location.replace(history.forward(1))
+            }
+        </script>
+    </h:body>
+
+</html>

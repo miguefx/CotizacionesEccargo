@@ -1,0 +1,15 @@
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight
+{
+    background: #DFDFDF !important;
+    text-shadow: 0.5px 1px #333 !important;
+
+}
+.rs1-wrap-input100 {
+    width: calc((47% - 30px) / 2);
+}
+
+.ui-widget-header
+{
+    border: 0px !important;
+    background: transparent !important;
+}
